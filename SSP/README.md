@@ -35,168 +35,72 @@ For compliance with NIST Publication 800-53 CA-8, Parameter 1 Penetration Testin
 ### Configuration Management
 #### NIST Controls: CM-2, CM-3, CM-6, CM-8
 
-CM-2	Baseline Configuration
+DOBT uses Amazon's Ubuntu 14.XXXX image as a baseline configuration. All additional configuration (for example, nginx.conf) is stored in version control, and any changes to the configuration are tested in a pre-production environment before being deploying to production.
 
-- We use AWS Ubuntu 14 as baseline
+The AWS management console is used to inventory and monitor all resources within the DOBT virtual private cloud. AWS Trusted Advisor is used to find unused or under-utilized resources. The data contained within both the management console and trusted advisor is updated in real-time.
 
-CM-3	Configuration Change Control
+### Identification and Authentication
+#### NIST Controls: IA-2
 
-- nginx config is in version control
-- changes are made on staging before production
+All users in Screendoor are uniquely identified with an email address and password combination. In addition, Multifactor authentication is available to all users of the system, both for privileged as well as non-privileged accounts.
 
-CM-6	Configuration Settings
+Any administrative actions taken on Screendoor by DOBT employees requires authentication via encrypted SSH keys that are only available to specific members of the DOBT Ops team.
 
-CM-8	Information System Component Inventory
+### Planning
+#### NIST Controls: PL-8
 
-- AWS dashboard is used to inventory and monitor resources
-- TrustedAdvisor is used to find unutilized resources
+DOBT has developed an information security architecture for the Screendoor that:
 
+1. Describes the overall philosophy, requirements, and approach to be taken with regard to protecting the confidentiality, integrity, and availability of organizational information;
+2. Describes how the information security architecture is integrated into and supports the enterprise architecture; and
+3. Describes any information security assumptions about, and dependencies on, external services.
 
-IA-2	Identification and Authentication (Organizational Users)
+DOBT reviews and updates the information security architecture at least quarterly, and ensures that planned information security architecture changes are reflected in the security plan, the security Concept of Operations (CONOPS), and organizational procurements/acquisitions.
 
-- 2-factor authentication is supported on all user accounts
+### Risk Assessment
+#### NIST Controls: RA-5
 
-IA-2 (1)	Identification and Authentication (Organizational Users)  Network Access to Privileged Accounts
-IA-2 (2)	Identification and Authentication (Organizational Users)  Network Access to Non-Privileged Accounts
-IA-2 (12)	Identification and Authentication  Acceptance of PIV Credentials
+DOBT conducts monthly operating system (OS) and web application scanning; quarterly database scanning; and OS and web application scanning with every code release.
 
+DOBT employs vulnerability scanning tools that promote interoperability such as Common Vulnerability Scoring System v2 (CVSS2), Common Platform Enumeration (CPE), and Common Vulnerability Enumeration (CVE), as well as OWASP TOP 10 vulnerabilities.
 
-PL-8	Information Security Architecture
+High-risk vulnerabilities are mitigated within thirty days (30), and moderate risk vulnerabilities are mitigated within ninety days (90).
 
-tl;dr write this documentation, keep it updated
+DOBT shares information obtained from the vulnerability scanning process with the DOBT Ops team in order to help eliminate similar vulnerabilities in other information systems.
 
-narrative: "#### a  \n18F has developed the system security plan (SSP) for Cloud\
-  \ Foundry PaaS containing the information security architecture for the information\
-  \ system that:\nDescribes the overall philosophy, requirements, and approach to\
-  \ be taken with regard to protecting the confidentiality, integrity, and availability\
-  \ of organizational information\nDescribes how the information security architecture\
-  \ is integrated into and supports the enterprise architecture\nDescribes any information\
-  \ security assumptions about, and dependencies on, external services\n  \n####\
-  \ b  \n18F Reviews and updates the information security architecture within the\
-  \ System Security plans and the 18F GitHub repository on an annual basis or when\
-  \ a significant change takes place to reflect updates in the enterprise architecture.\n\
-  Due to the dynamic and elastic nature of cloud computing,  18F monitors real-time\
-  \ updates of its information security architecture using its infrastructure management\
-  \  and visual security consoles.\n  \n#### c  \n18F ensures that planned information\
-  \ security architecture changes are reflected in the security plan and organizational\
-  \ procurements/acquisitions.\n18F follows the risk management framework (RMF)\
-  \ which includes conducting annual risk assessments for its information systems\
-  \ and infrastructure. Any changes are then updated in systems security plans,\
-  \ plan of actions and milestones POA&Ms, security assessment reports (SAR)\n \
+### System and Services Acquisition
+#### NIST Controls: SA-11, SA-22
 
-RA-5	Vulnerability Scanning
+DOBT utilizes static code analysis tools such as Brakeman and Codeclimate in order to continuously monitor developers' code for security flaws. If a flaw is detected, the developer is alerted immediately, and the code is unable to be deployed until the flaw is remediated. The results of these scans are logged to DOBT's continuous integration (CI) system, where they are available for historical access.
 
-tl;dr continuous OS scanning, code scanning on every code release
-- OWASP top 10
+DOBT does not use software where support is no longer available from the developer, vendor, or manufacturer. DOBT implements automated processes that run at least weekly in order to ensure that all software is kept up-to-date, and that the DOBT Ops team is notified of any out-of-date-software.
 
-narrative: "#### a  \n18F Conducts monthly Operating System (OS) and web application\
-  \ scanning; quarterly database scanning; and, OS and Web application scanning\
-  \ with every code release. 18F conducts internal vulnerabilty scanning of its\
-  \ VPC and private subnets within the 18F Virtual Private Cloud.\n  \n#### b  \n\
-  18F vulnerabilty scanning toos utilize techniques that promote interoperability\
-  \ such as Common Vulnerability Scoring System v2 (CVSS2), Common Platform Enumeration\
-  \ (CPE), and Common Vulnerability Enumeration (CVE) and OWASP TOP 10 vulnerabilities.\n\
-  \  \n#### c  \n18F Analyzes vulnerability scan reports from its vulnerabilty scanning\
-  \ tools assessments at least weekly and appropriate actions taken on discovery\
-  \ of vulnerabilities within the 18F Cloud Infrastructure and applications and\
-  \ from security control assessments conducted on its information systems.\n  \n\
-  #### d  \nHigh-risk vulnerabilities are mitigated within thirty days (30); moderate\
-  \ risk vulnerabilities mitigated within ninety days (90). If the recommended steps\
-  \ will adversely impact functionality or performance, the ISSO/ISSM will reviews\
-  \ changes and mitigating controls with 18F DevOps as well as the Cloud Foundry\
-  \ system owners.\n  \n#### e  \n18F shares information obtained from the vulnerability\
-  \ scanning process and security control assessments with designated System Owners,\
-  \ DevOPs, GSA SecOps, ISSM and the Authorizing Official (AO) to help eliminate\
-  \ similar vulnerabilities in other information systems (i.e., systemic weaknesses\
-  \ or deficiencies).\n  \n"
+If it is deemed necessary to use unsupported software, DOBT will provide written justification for its continued use.
 
-SA-22	Unsupported System Components
+### System and Communications Protection
+#### NIST Controls: SC-7
 
-- Don't use unsupported software
-- Provide justification for continued use of unsupported software
+DOBT implements subnetworks for publicly accessible system components that are logically separated from internal organizational networks. For internal networks, DOBT utilizes the Amazon Virtual Private Cloud, which leverages multiple layers of security, including security groups and network access control lists, to help control access to server instances in each subnet.
 
-SA-11 (1)	Developer Security Testing and Evaluation/ Static Code Analysis
+All public access to DOBT systems is performed over encrypted protocols such as `https` and `wss`. All requests to DOBT's systems over insecure protocols such as `http` and `ws` are automatically redirected to their secure counterparts.
 
-- Brakeman / Codeclimate / Other static analysis
+### System and Information Integrity
+#### NIST Controls: SI-2, SI-4, SI-10
 
-SC-7	Boundary Protection
+DOBT identifies all system flaws related to Screendoor, reports flaws to information system owners, authorizing officials, and the DOBT Ops team. DOBT proactively installs software updates (such as patches, service packs, hot-fixes, and anti-virus signatures) to its infrastructure on a monthly basis. Software updates are tested for side-effects in a pre-production environment before being deployed to production. DOBT incorporates flaw remediation into its configuration management process.
 
-- AWS VPC
--   narrative: "#### b  \n18F Implements subnetworks for publicly accessible system\
-    \ components that are logically separated from internal organizational networks\n\
+The DOBT Ops team monitors Screendoor's infrastructure to detect potential attacks and intrusions from internal and external sources.
 
+DOBT detects unauthorized access to Screendoor using automated monitoring tools, log management, and event analysis. DOBT monitors for attacks and indicators of potential attacks, such as unauthorized local, network, and remote connections.
 
-SC-13	Cryptographic Protection/ FIPS Validated Cryptography
+The infrastructure that hosts Screendoor provides monitoring and intrusion detection at the physical and network layers. DOBT is responsible for monitoring everything related to its virtual infrastructure, and has deployed monitoring and detection tools within its virtual private cloud to log and detect malicious activities to its information systems including Screendoor.
 
-- http -> https redirect
-- ws -> wss redirect for websockets
-- All traffic over public internet happens over https
+DOBT ensures that intrusion and monitoring tools are protected from unauthorized access by only granting access to certain members of its Ops team. All monitoring and intrusion information data is protected by limiting accounts to authorized users only, and is maintained in secure repositories for review by those members.
 
-SI-2	Flaw Remediation
+Information system monitoring will be heightened based US-CERT Advisories, advisories from commercial security communities, and other sources.
 
-- Patches automatically installed
-- Patches are tested in staging for side-effects before going into production
+Screendoor checks the valid syntax and semantics of information system inputs (e.g., character set, length, numerical range, and acceptable values) and verifies that inputs match specified definitions for format and content. The Ruby on Rails framework ensures that user inputs are always sanitized before being used in database queries.
 
-narrative: "#### a  \n18F identifies all system flaws related to Cloud.gov, reports\
-  \ system flaws to information system owners, Authorizing officials, DevOps and\
-  \ SecOp  and corrects information system flaws that affect Cloud.Gov\nCloud Foundry\
-  \ manages software vulnerability using releases and BOSH stemcells. New Cloud\
-  \ Foundry releases are created with updates to address code issues, while new\
-  \ stemcells are created with patches for the latest security fixes to address\
-  \ any underlying operating system issues. New Cloud Foundry releases are located\
-  \ at https://github.com/Cloud Foundry/cf-release.\n18F implemenets the release\
-  \ of Cloud Foundy he what (or the software developer/vendor in the case of software\
-  \ developed and maintained by a vendor/contractor) promptly installs newly released\
-  \ security relevant patches and tests patches, for effectiveness and potential\
-  \ side effects on information systems before installation.\n  \n"
+To mitigate attack vectors such as cross-site scripting and other injection attacks, Screendoor sanitizes user-inputs before rendering them to other users of the system.
 
-
-  narrative: "#### b  \nTests software and firmware updates related to flaw remediation\
-    \ for effectiveness and potential side effects before installation.\n  \n####\
-    \ c  \nInstalls security-relevant software and firmware updates within 30 daysrelease\
-    \ of updates of the release of the updates.\n  \n#### d  \n18F incorporates flaw\
-    \ remediation into the its configuration management process. New versions of Cloud.gov\
-    \ can easily recreated and deployed in the event of any system flaws.\n  \n"
-
-SI-4	Information System Monitoring
-
-- Constant monitoring
-- AWS has physical and network level controls
-- Monitoring within VPC?
-
-
-narrative: "#### a  \nThe 18F DevOps and SecOps teams monitors the Cloud.Gov information\
-  \ system to detect potential attacks and intrusions from internal and external\
-  \ sources in accordance with the 18F System Information and Integrity Policy section\
-  \ 3 - Information System monitoring, the FedRAMP Incident communication procedures\
-  \ and GSA CIO-IT Security-08-39 section \u201CSystem Monitoring / Audit Record\
-  \ Review \u201C for GSA specifc infomation systems\n  \n#### b  \n18F identifies\
-  \ un-authorized access to the Cloud.Gov information system using   automated monitoring\
-  \ tools within its virutal proviate cloud for monitoringing, log management and\
-  \ event analysis. 18F monitors for attacks and indicators of potential attacks,\
-  \  unauthorized local, network, and remote connections.\n  \n#### c  \nThe infrastructure\
-  \ that hosts Cloud.Gov provides monitoring and intrusion detcetion of unsual activity\
-  \ at  the phyical and network layers. 18F is responsible for monitoring everything\
-  \ related to its virtual infrastructure and has deployed monitoring  and intrusion\
-  \ dectction tools within its virtual private cloud to log and dectect malicious\
-  \ activities to its information systems including Cloud.Gov.\n  \n#### d  \n18F\
-  \ ensures intrusion and monitoring tools are protected  from unauthorized access\
-  \ by only granting access to certian members from the DevOps and SecOps team.\
-  \ All monitoring and intrusion information data is protected by limiting accounts\
-  \ to authorized privileged users only and is maintained in secured repositories\
-  \ for review by those members.\n  \n#### e  \nInformation system monitoring will\
-  \ be heightened based on advisories from Pivitol, US-CERT Advisories, commercial\
-  \ security communities, and other sources.\n  \n#### f  \nInformation system monitoring\
-  \ will be conducted in accordance and compliance with 18F security policies and\
-  \ all applicable laws, Executive Orders, directives, and regulations.\n  \n####\
-  \ g  \n18F provides monitoring of all information system components in the event\
-  \ of an event or incident, information will be provided as it is available.  Scheduled\
-  \ reports will be provided for events such as after-hours administrative logins,\
-  \ users being added to privileged groups, persistent malware detections, etc.\
-  \ to designated members of the DevOps teams and SecOps teams as needed\n  \n"
-
-SI-10	Information Input Validation
-
-- Rails sanitizes data before making SQL queries
-- User-inputs are sanitized before being rendered as HTML (sanitize gem)
-- No manual override for sanitization
+There is no manual override for any of Screendoor's input validation.
