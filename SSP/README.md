@@ -35,7 +35,7 @@ For compliance with NIST Publication 800-53 CA-8, Parameter 1 Penetration Testin
 ### Configuration Management
 #### NIST Controls: CM-2, CM-3, CM-6, CM-8
 
-DOBT uses Amazon's Ubuntu 14.XXXX image as a baseline configuration. All additional configuration (for example, nginx.conf) is stored in version control, and any changes to the configuration are tested in a pre-production environment before being deploying to production.
+DOBT uses Amazon's Ubuntu 12.04.4 LTS image as a baseline configuration. All additional configuration (for example, nginx.conf) is stored in version control, and any changes to the configuration are tested in a pre-production environment before being deploying to production.
 
 The AWS management console is used to inventory and monitor all resources within the DOBT virtual private cloud. AWS Trusted Advisor is used to find unused or under-utilized resources. The data contained within both the management console and trusted advisor is updated in real-time.
 
