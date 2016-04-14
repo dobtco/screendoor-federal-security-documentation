@@ -1,83 +1,39 @@
-SSP
+System Security Plan
 ---
 
-AC-2	Account Management
+We have documented our compliance with the 24 NIST controls that are part of a "Lightweight ATO process", [as described by GSA CISO Kurt Gabars](https://gsablogs.gsa.gov/innovation/2014/12/10/it-security-security-in-an-agile-development-cloud-world-by-kurt-garbars/). We have chosen to implement these controls as per his argument:
 
-- All requests are authorized
-- Permissions assigned by role
-- New accounts can be created by administrators
-- Only administrators can change permissions
-- Administrators can remove accounts
-- No group credentials
+> If you truly implement these 24 controls and continuously monitor and secure these systems, they will be more secure than at least 95 percent of all the systems you have deployed.
 
+### Account Management
+#### NIST Controls: AC-2
 
-AC-3	Access Enforcement
-
-narrative: "18F information systems enforces approved authorizations for logical\
-  \ access to information and system resources in accordance with the 18F access\
-  \ control policy Section 3 Access Enforcement which states:\n  * 18F must enforce\
-  \ approved authorizations for logical access to its information systems in accordance\
-  \ with all applicable Federal, and 18F policies.\n  * 18F must provide access\
-  \ enforcement through the use of access control lists, access control matrices,\
-  \ cryptography) to control access between users (or processes acting on behalf\
-  \ of users) and objects (e.g., devices, files, records, processes, programs, domains)\
-  \ in the information system.\n  * 18F must employ access enforcement mechanisms\
-  \ at the application level, when necessary, to provide increased information security\
-  \ for the organization.\n"
+All requests to Screendoor are authorized at the application level, and will return a 401 status code if the user does not have permission to access the requested resource. Screendoor's user permissions are assigned by role (e.g. "Read only", "Reviewer", "Manager", "Administrator",) and only administrators have the ability to modify these permissions. New accounts must be created by an existing administrator, and administrators also have the ability to remove user accounts. Screendoor does not utilize group credentials.
 
 
-AC-6	Least Privilege
-narrative: "18F restricts privileged accounts such as administrator and root access\
-  \ accounts to designated members within the18F Devops and SecOps teams. Within\
-  \ the virtual infrastructure the admin account is not used for privileged access.\
-  \ It\u2019s only used for billing and metrics.\n"
+### Access Control
+#### NIST Controls: AC-3, AC-6
 
-AU-2	Audit Events
+Screendoor enforces access control policies at the system as well as the application level. Processes run on the principle of "least privilege", and root or admin accounts are not used for application purposes. In addition, DOBT restricts privileged account usage to designated members of the DOBT Ops team. Within the virtual infrastructure the admin account is not used for privileged access; it is used for billing and metrics only.
 
-narrative: 'The Devops and SecOps teams review all events that can be audited on
-  a real time basis using its event and monitoring solution for Cloud.Gov and through
-  captured user and event api calls within its virtual infrastructure.
+### Auditing and Accountability
+#### NIST Controls: AU-2, AU-6
 
-AU-6	Audit Review, Analysis and Reporting
+The DOBT Ops team reviews all events that can be audited on a realtime basis using its event and monitoring solutions, and there are systems in place for capturing and storing these events for future review.
 
-narrative: "Audit Monitoring, Analysis and Reporting\n * 18F establishes processes\
-  \ for regularly reviewing audit log information, and reporting security issues\
-  \ if discovered. Reviews will occur at a minimum of weekly. These processes should\
-  \ be integrated with processes for incident response, in order to ensure standardization\
-  \ and cross-functional collaboration\n * 18F employs automated mechanisms to integrate\
-  \ audit monitoring, analysis and reporting into an overall process for investigation\
-  \ and response to suspicious activities.\n * 18F employs automated mechanisms\
-  \ to immediately alert security personnel of inappropriate or unusual activities\
-  \ that have security implications.\n"
+DOBT establishes processes for regularly reviewing these audit logs, and reporting security issues if discovered. Reviews will occur on at least a weekly basis.
 
-  narrative: "#### a  \nAWS Auditable Events:\nDevOps and SecOps teams will conduct\
-    \ weekly manual and automated continuous audits of authorized accounts and configurations.\
-    \ These audits will include but are not limited to:\nAdministrative Accounts\n\
-    * Virtual Private Cloud (VPC)\n* Elastic Compute Cloud (EC2)\n* Simple Storage\
-    \ Service (S3)\n* Identity and Access Management (IAM)\n* Elastic Block Store\
-    \ (EBS)\n\n\nCloud Foundry Auditable Events:\nBy default, Loggregator streams\
-    \ logs to a terminal. 18F will drain logs to a third-party log management service\
-    \ such as ELK and AWS CloudTrail\nCloud Foundry logs are captured in multiple\
-    \ tables and log files. These will be reviewed weekly and if discovery of anomalous\
-    \ audit log content which appears to indicate a breach are handled according to\
-    \ the GSA Security Incident Handling Guide: CIO IT Security 01-02 Revision 7 (August\
-    \ 18, 2009) requirements.\n  \n#### b  \nWhen a credible source to the GSA Agency\
-    \ provides information that causes reason to enhance audit activities, develop\
-    \ and implement an enhanced auditing use-case that will adequately enhance auditing\
-    \ practices in a fashion necessary per the identified threat and following the\
-    \ Incident Reporting Procedures in GSA IT Security Procedural Guide 01-02 (04/07/2015),\
-    \ Incident Response. The GSA Agency may also, through analysis pertaining to the\
-    \ GSA Agency environment provide additional audit measures that will require an\
-    \ increase in review, analysis, and reporting for a necessary.\nUpon implementation,\
-    \ 18F will monitor information security news and alerts for indications of a need\
-    \ to heighten information system security monitoring.\n  \n"
+DOBT employs automated mechanisms to integrate audit monitoring, analysis, and reporting into an overall process for investigation and responses to suspicious activities.
 
-CA-8	Penetration Testing
+DOBT employs automated mechanisms to immediately alert security personnel of inappropriate or unusual activities that have security implications.
 
-For compliance with NIST Publication 800-53 CA-8, Parameter 1 Penetration Testing
-of all 18F Infrastructure and Application Components will occur annually. Parameter
-2 Penetration Testing of Publicly Accessible Infrastructure will be performed
-on the direction of the 18F .
+### Security Assessment and Authoriation
+#### NIST Controls: CA-8
+
+For compliance with NIST Publication 800-53 CA-8, Parameter 1 Penetration Testing of all DOBT Infrastructure and Application Components will occur annually. Parameter 2 Penetration Testing of Publicly Accessible Infrastructure will be performed on the direction of the DOBT Ops team.
+
+### Configuration Management
+#### NIST Controls: CM-2, CM-3, CM-6, CM-8
 
 CM-2	Baseline Configuration
 
