@@ -13,7 +13,7 @@ Screendoor is a cloud-based application that allows government users to build fo
 
 Screendoor is a Ruby on Rails application that is hosted in the AWS US-Oregon region. Internally, all network traffic occurs within Amazon's Virtual Private Cloud. All traffic to the public internet occurs over encrypted protocols such as `https` and `wss`.
 
-![network diagram](files/network diagram.png)
+![network diagram](https://github.com/dobtco/screendoor-federal-security-documentation/blob/master/files/network%20diagram.png)
 
 <!-- generated via https://moqups.com/#!/edit/adamjacobbecker/rZf5xfry -->
 
