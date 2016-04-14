@@ -1,7 +1,5 @@
-Dynamic scans
+Dynamic Scans
 ----
-
-## Scan summary
 
 - 4 issues classified as "Low"
 - 1 issue classified as "Medium"
