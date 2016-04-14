@@ -21,6 +21,12 @@ Screendoor is a Ruby on Rails application that is hosted in the AWS US-Oregon re
 
 The majority of Screendoor's federal customers are categorized as FISMA Low, since they do not collect PII as per [GSA's definition](https://pages.18f.gov/before-you-ship/security/pii/).
 
+## System security plan
+
+We have documented our compliance with the 24 NIST controls that are part of a "Lightweight ATO process", [as described by GSA CISO Kurt Gabars](https://gsablogs.gsa.gov/innovation/2014/12/10/it-security-security-in-an-agile-development-cloud-world-by-kurt-garbars/).
+
+[View Screendoor's SSP &rarr;](SSP)
+
 ## Static scans
 
 Screendoor is continuously scanned with Brakeman, a static code analysis tool for Ruby on Rails.
@@ -32,12 +38,6 @@ Screendoor is continuously scanned with Brakeman, a static code analysis tool fo
 Screendoor's most recently dynamic scan was performed with HP Fortify On Demand.
 
 [View Screendoor's dynamic scan report &rarr;](Dynamic Scans)
-
-## System security plan
-
-We have documented our compliance with the 24 NIST controls that are part of a "Lightweight ATO process", [as described by GSA CISO Kurt Gabars](https://gsablogs.gsa.gov/innovation/2014/12/10/it-security-security-in-an-agile-development-cloud-world-by-kurt-garbars/).
-
-[View Screendoor's SSP &rarr;](SSP)
 
 ## References and attachments
 
